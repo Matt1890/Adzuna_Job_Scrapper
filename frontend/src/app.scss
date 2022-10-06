@@ -1,0 +1,30 @@
+header {
+    padding: 50px;
+    background-image: url(src/img/job_hunt.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 400px;
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    form {
+        margin-top: 50px;
+        max-width: 400px;
+    }
+}
+
+.card {
+    margin: 25px 0;
+}
+
+.loading-element {
+    width: 100px;
+    margin: 0 auto;
+    height: 100px;
+    display: none;
+    &.loading {
+        display: block;
+    }
+}

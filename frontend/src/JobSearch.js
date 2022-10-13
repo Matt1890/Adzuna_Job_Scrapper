@@ -1,5 +1,5 @@
-import { getCurrencySymbol, extractFormData } from '.api/frontend/src/utils.js';
-import { jobTemplate } from '.api/frontend/src/templates.js';
+import { getCurrencySymbol, extractFormData } from './utils';
+import { jobTemplate } from './templates';
 
 export class JobSearch {
     constructor(
@@ -9,15 +9,17 @@ export class JobSearch {
     ) {
         this.searchForm = document.querySelector(searchFormSelector);
         this.resultsContainer = document.querySelector(resultsContainerSelector);
-        this.loadingElementSelector = document.querySelector(loadingElementSelector);
+        this.loadingElement = document.querySelector(loadingElementSelector);
     }
+
     setCountryCode() {
-        this.countryCode = 'us';
+        this.countryCode = 'us';  //default us
         this.setCurrencyCode();
 
-        fetch('http://ip-api.com/json')
+        fetch('http://ip-api.com/json/')
             .then(results => results.json())
             .then(results => {
+                console.log(countryCode);
                 this.countryCode = results.countryCode.toLowerCase();
                 this.setCurrencySymbol();
             });
@@ -26,6 +28,7 @@ export class JobSearch {
     setCurrencyCode() {
         this.currencySymbol = getCurrencySymbol(this.countryCode);
     }
+
     configureFormListener() {
         this.searchForm.addEventListener('submit', (event) => {
             event.preventDefault();
@@ -37,19 +40,23 @@ export class JobSearch {
             fetch(`http://localhost:3000/?search=${search}&location=${location}&country=${this.countryCode}`)
                 .then(response => response.json())
                 .then(({ results }) => {
+                    //console.log(results);
                     this.stopLoading();
                     return results
                         .map(job => jobTemplate(job, this.currencySymbol))
                         .join('');
+                        
                 })
-                .then(jobs => this.resultsContainer = jobs)
+                .then(jobs => this.resultsContainer.innerHTML = jobs)
                 .catch(() => this.stopLoading());
         });
     }
-    startLoading(){
+
+    startLoading() {
         this.loadingElement.classList.add('loading');
     }
-    stopLoading(){
+
+    stopLoading() {
         this.loadingElement.classList.remove('loading');
     }
 }

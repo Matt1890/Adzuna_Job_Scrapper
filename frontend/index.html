@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="src/app.scss">
+    <link rel="stylesheet" href="./src/app.scss">
     <title>Job Search App</title>
 </head>
 <body>
@@ -20,15 +20,14 @@
             </form>
         </div>
     </header>
-<main>
-    <div class="container">
-        <div class="loading-element">
-            <img src="src/img/cubic_loader.mp4" alt="">        
+    <main>
+        <div class="container">
+            <div class="loading-element">
+                <img src="./src/img/icons8-fidget-spinner.gif">        
+            </div>
+            <div class="result-container"></div>
         </div>
-        <div class="result-container"></div>
-    </div>
-</main>
-<script src="src/app.js"></script>
-    
+    </main>
+    <script type="module" src="./src/app.js"></script>
 </body>
 </html>
